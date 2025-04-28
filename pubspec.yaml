@@ -34,6 +34,8 @@ dependencies:
   get: ^4.6.5
   pin_code_fields: ^8.0.1
   intl_phone_field: ^3.1.0
+  provider: ^6.0.5
+  fl_chart: ^0.66.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

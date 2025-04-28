@@ -35,128 +35,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 style: TextStyle(fontSize: 16, color: Colors.grey),
               ),
               const SizedBox(height: 10),
-              TextField(
-                decoration: InputDecoration(
-                  labelText: 'Name',
-                  labelStyle: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  hintText: 'Md: Kamrul Hasan',
-                  hintStyle: const TextStyle(color: Colors.grey),
-                ),
-              ),
-              const SizedBox(height: 20),
-              // TextField(
-              //   decoration: InputDecoration(
-              //     labelText: 'Phone Number',
-              //     labelStyle: TextStyle(
-              //       color: Colors.black,
-              //       fontSize: 16,
-              //       fontWeight: FontWeight.w500,
-              //     ),
-              //     hintText: ' 17XXXXXXXX',
-              //     hintStyle: const TextStyle(color: Colors.grey),
-              //   ),
-              // ),
+              _textFormField(),
 
-              IntlPhoneField(
-                decoration: InputDecoration(
-                  labelText: 'Phone Number',
-                  labelStyle: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  hintText: '17XXXXXXXX',
-                  hintStyle: TextStyle(color: Colors.grey),
-                  border: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey),
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 2),
-                  ),
-                ),
-                initialCountryCode: 'BD', // 🇧🇩 Bangladesh
-                onChanged: (phone) {
-                  print(phone.completeNumber); // Full phone number with country code
-                },
-              ),
-
-
-              const SizedBox(height: 20),
-              TextField(
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  labelStyle: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  hintText: 'user@example.com',
-                  hintStyle: const TextStyle(color: Colors.grey),
-                ),
-              ),
-              const SizedBox(height: 20),
-              const TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  labelStyle: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  hintText: '********',
-                  hintStyle: TextStyle(letterSpacing: 3, color: Colors.grey),
-                  suffixIcon: Icon(Icons.remove_red_eye),
-                ),
-              ),
-              const SizedBox(height: 20),
-              TextField(
-                // controller: _cPasswordTEController,
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: 'Confirm Password',
-                  labelStyle: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  hintText: '********',
-                  hintStyle: TextStyle(letterSpacing: 3, color: Colors.grey),
-                  suffixIcon: Icon(Icons.remove_red_eye),
-                ),
-              ),
               SizedBox(height: 20),
 
-              SizedBox(
-                width: double.infinity,
-                height: 50,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Get.to(() =>  HomeScreen());
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
-                  child: const Text(
-                    "Sign Up",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ),
+              _elevatedButton(),
               const SizedBox(height: 20),
               const Center(
                 child: Text(
@@ -224,6 +107,149 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Column _textFormField() {
+    return Column(
+              children: [
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Name',
+                    labelStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    hintText: 'Md: Kamrul Hasan',
+                    hintStyle: const TextStyle(color: Colors.grey),
+                  ),
+                ),
+                const SizedBox(height: 20),
+
+                // TextField(
+                //   decoration: InputDecoration(
+                //     labelText: 'Phone Number',
+                //     labelStyle: TextStyle(
+                //       color: Colors.black,
+                //       fontSize: 16,
+                //       fontWeight: FontWeight.w500,
+                //     ),
+                //     hintText: ' 17XXXXXXXX',
+                //     hintStyle: const TextStyle(color: Colors.grey),
+                //   ),
+                // ),
+                _buildIntlPhoneField(),
+
+                const SizedBox(height: 20),
+
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    labelStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    hintText: 'user@example.com',
+                    hintStyle: const TextStyle(color: Colors.grey),
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                const TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    labelStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    hintText: '********',
+                    hintStyle: TextStyle(
+                      letterSpacing: 3,
+                      color: Colors.grey,
+                    ),
+                    suffixIcon: Icon(Icons.remove_red_eye),
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+                TextField(
+                  // controller: _cPasswordTEController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    labelText: 'Confirm Password',
+                    labelStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    hintText: '********',
+                    hintStyle: TextStyle(
+                      letterSpacing: 3,
+                      color: Colors.grey,
+                    ),
+                    suffixIcon: Icon(Icons.remove_red_eye),
+                  ),
+                ),
+              ],
+            );
+  }
+
+  Widget _elevatedButton() {
+    return SizedBox(
+      width: double.infinity,
+      height: 50,
+      child: ElevatedButton(
+        onPressed: () {
+          Get.to(() => HomeScreen());
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.green,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+        ),
+        child: const Text(
+          "Sign Up",
+          style: TextStyle(
+            fontSize: 18,
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildIntlPhoneField() {
+    return IntlPhoneField(
+      decoration: InputDecoration(
+        labelText: 'Phone Number',
+        labelStyle: TextStyle(
+          color: Colors.black,
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+        ),
+        hintText: '17XXXXXXXX',
+        hintStyle: TextStyle(color: Colors.grey),
+        border: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey),
+        ),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey, width: 2),
+        ),
+      ),
+      initialCountryCode: 'BD', // 🇧🇩 Bangladesh
+      onChanged: (phone) {
+        print(phone.completeNumber); // Full phone number with country code
+      },
     );
   }
 }

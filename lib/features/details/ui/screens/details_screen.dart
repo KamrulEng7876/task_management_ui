@@ -1,4 +1,6 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import '../../../add_to_card_screen/ui/screens/office_input_screen.dart';
 import '../../../home/model/cart_model.dart';
 
 class DetailsScreen extends StatelessWidget {
@@ -75,6 +77,11 @@ class DetailsScreen extends StatelessWidget {
               peopleCount: place.peopleCount,
             ),
             SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: SizedBox(height: 200, child: _buildLineChart()),
+            ),
+            SizedBox(height: 10),
             Row(
               children: [
                 Text(
@@ -85,7 +92,15 @@ class DetailsScreen extends StatelessWidget {
                 Row(
                   children: [
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        // Get.to(() => OfficeScreen());
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => OfficeListScreen(),
+                          ),
+                        );
+                      },
                       child: Row(
                         children: [
                           Text('See all', style: TextStyle(color: Colors.grey)),
@@ -102,8 +117,60 @@ class DetailsScreen extends StatelessWidget {
             SizedBox(height: 16),
 
             _buildPlantCard(),
+            SizedBox(height: 16),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildLineChart() {
+    return LineChart(
+      LineChartData(
+        titlesData: FlTitlesData(
+          leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          bottomTitles: AxisTitles(
+            sideTitles: SideTitles(
+              showTitles: true,
+              getTitlesWidget: (value, meta) {
+                const labels = [
+                  'Oct 24',
+                  'Nov 24',
+                  'Dec 24',
+                  'Jan 25',
+                  'Feb 25',
+                  'Mar 25',
+                  'Apr 25',
+                ];
+                return Text(
+                  labels[value.toInt() % labels.length],
+                  style: const TextStyle(fontSize: 10),
+                );
+              },
+            ),
+          ),
+        ),
+        gridData: FlGridData(show: false),
+        borderData: FlBorderData(show: false),
+        lineBarsData: [
+          LineChartBarData(
+            spots: [
+              const FlSpot(0, 1),
+              const FlSpot(1, 2),
+              const FlSpot(2, 2.5),
+              const FlSpot(3, 2),
+              const FlSpot(4, 2.2),
+              const FlSpot(5, 2.1),
+              const FlSpot(6, 1.2),
+            ],
+            isCurved: true,
+            color: Colors.green,
+            barWidth: 3,
+            dotData: FlDotData(show: true),
+          ),
+        ],
       ),
     );
   }
@@ -128,7 +195,7 @@ class DetailsScreen extends StatelessWidget {
           padding: const EdgeInsets.only(left: 16.0),
           child: Row(
             children: [
-              _buildplantImage(),
+              _buildPlantImage(),
 
               Spacer(),
               Column(
@@ -166,7 +233,7 @@ class DetailsScreen extends StatelessWidget {
     );
   }
 
-  Column _buildplantImage() {
+  Column _buildPlantImage() {
     return Column(
       children: [
         SizedBox(height: 16),
@@ -341,7 +408,7 @@ class DetailsScreen extends StatelessWidget {
         // ],
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(0.0),
         child: Column(
           children: [
             const SizedBox(height: 28),
@@ -390,48 +457,12 @@ class DetailsScreen extends StatelessWidget {
                   ],
                 ),
                 const Spacer(),
-                _imageCircleAvatar(peopleCount),
+                // _imageCircleAvatar(peopleCount),
               ],
             ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _imageCircleAvatar(String peopleCount) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            const CircleAvatar(
-              radius: 16,
-              backgroundImage: AssetImage('assets/images/image.png'),
-            ),
-            const CircleAvatar(
-              radius: 16,
-              backgroundImage: AssetImage('assets/images/image.png'),
-            ),
-            CircleAvatar(
-              radius: 16,
-              child: Text(peopleCount, style: const TextStyle(fontSize: 10)),
-            ),
-          ],
-        ),
-        const SizedBox(height: 8),
-        Row(
-          children: const [
-            Text(
-              "View Details",
-              style: TextStyle(
-                color: Colors.green,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            Icon(Icons.arrow_right, color: Colors.green),
-          ],
-        ),
-      ],
     );
   }
 }
