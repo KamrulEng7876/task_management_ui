@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text("Hello Alex", style: AppSizes.nameText(context)),
-                Text("Good night", style: AppSizes.normalBolds(context)),
+                Text("Good morning", style: AppSizes.normalBolds(context)),
               ],
             ),
           ],
