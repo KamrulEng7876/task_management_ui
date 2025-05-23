@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Hello Alex", style: AppSizes.nameText(context)),
+                Text("Hello Kamrul", style: AppSizes.nameText(context)),
                 Text("Good morning", style: AppSizes.normalBolds(context)),
               ],
             ),
